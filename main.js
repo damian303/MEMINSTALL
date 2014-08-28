@@ -21,6 +21,7 @@ var imps_pre_install =[];
 			$("#txt_username").val(username);
 			$("#txt_pwd").val(password);
 		}
+		$('#btn_login').click(function(){verifyLogin();});
     });
 
 	$("div[data-role=page]").bind("pagebeforeshow", function (e, data) {
