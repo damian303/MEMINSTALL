@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" id="viewport"	content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>MEM Setup</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+		<script src="d3.v3.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<!----------------------------- Login Page --------------------------------->	
+<div id="login" data-role="page">
+    <div data-role="header">
+        <h1>Login</h1>
+    </div>
+
+	<div data-role="content" id="input_login">
+	   <form id="loginForm">
+        <div data-role="fieldcontain" class="ui-hide-label">
+            <input type="text" name="username" id="txt_username" value="" placeholder="Username" />
+        </div>
+        <div data-role="fieldcontain" class="ui-hide-label">        
+            <input type="password" name="password" id="txt_pwd" value="" placeholder="Password" />
+        </div>
+        <input type="submit" value="Login" id="btn_login" onclick="javascript:verifyLogin();">
+        </form>
+
+    </div>
+</div>
+<!----------------------------- Client Chooser Page --------------------------------->	
+<div id="set_client" data-role="page">
+    <div data-role="header">
+        <a href="#" data-icon="arrow-l" data-iconpos="left" data-transition="slidedown">Back</a>
+        <h1>Set the Client</h1>
+    </div>
+    <div data-role="content">
+        <div id='chooseStore'>
+		<div data-role="fieldcontain">
+		   <label for="client_ID" class="select">Client ID:</label>
+		   <select name="client_ID" id="client_ID">
+		   </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+		   <label for="store_ID" class="select">Store ID:</label>
+		   <select name="store_ID" id="store_ID">   
+		   </select>
+		</div>
+		
+		<div id="setStore" data-role="button" >OK</div>
+		</div>
+		
+    </div>
+	<div data-role="popup" id="instruction">
+		<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		 <div data-role="header" data-theme="a">
+		  <h1>Info</h1>
+		 </div>
+		 <div id="instructionContent" data-role="content">
+			
+		 </div>
+	</div>
+
+</div>
+<!----------------------------- Layout Page --------------------------------->
+<div id="layout" data-role="page">
+    <div data-role="header">
+        <a href="#set_client" data-icon="arrow-l" data-iconpos="left" data-transition="slidedown">Back</a>
+        <h1>Layout</h1>
+		<h3 id="client_info"></h3>
+    </div>
+	<div id="control">
+			<label for="select-device" class="select">Select MEM device</label>
+				<select name="select-device" id="select-device">
+
+				</select>
+		</div>
+	<div id="svg"></div>	
+</div>
+<!----------------------------- CT Chooser Page --------------------------------->
+<div data-role="page" id="CT_chooser">
+		 <div data-role="header" data-theme="a">
+			<a href="#layout" data-icon="arrow-l" data-iconpos="left" data-transition="slidedown">Back</a>
+			<h1 class='selected_freezer'></h1>
+		 </div>
+		 <div id='chooserContent'  data-role="content">
+			<h4 class='helper'>Choose which CT goes with this Location</h4>
+				<fieldset id="sensorPosition" data-role="controlgroup">
+				<legend id="freezerID"></legend>
+					<input type="radio" name="sensor" id="sensor-1" value="choice-1" />
+					<label for="sensor-1" id="sensor-1">CT 1</label>
+
+					<input type="radio" name="sensor" id="sensor-2" value="choice-2"  />
+					<label for="sensor-2" id="sensorLabel2">CT 2</label>
+
+					<input type="radio" name="sensor" id="sensor-3" value="choice-3"  />
+					<label for="sensor-3" id="sensorLabel3">CT 3</label>
+				</fieldset>
+				<div id="setCT" data-role="button">OK</div>
+		 </div>		
+	</div>  
+<!----------------------------- Scan Page --------------------------------->	
+	<div data-role="page" id="scan_sensor">
+		 <div data-role="header" data-theme="a">
+			<a href="#CT_chooser" data-icon="arrow-l" data-iconpos="left" data-transition="slide-down" >Back</a>
+			<h1 class='selected_freezer'></h1>
+		 </div>
+		 <div id='chooserContent'  data-role="content">
+			<h4 class='helper'>Point the camera at the QR code</h4>
+				<div id="scan" data-role="button">Scan</div>
+		 </div>		
+	</div>
+<!----------------------------- Scan Done Page --------------------------------->
+	<div data-role="page" id="scan_done">
+		 <div data-role="header" data-theme="a">
+			<h1 class='selected_freezer'></h1>
+		 </div>
+		 <div id='chooserContent'  data-role="content">
+			<h4 class='helper'>Found Code</h4>
+			<h4 id='sensor_id'></h4>
+				<div id="saveSensor" data-role="button">Save</div>
+				<div id="reScan" data-role="button">Re-Scan</div>
+		 </div>		
+	</div>
+<!----------------------------- Scan Done Page --------------------------------->
+	<div data-role="page" id="sensor_used">
+		 <div data-role="header" data-theme="a">
+			<h1 class='selected_freezer'></h1>
+		 </div>
+		 <div id='chooserContent'  data-role="content">
+			<h4 class='helper'>You have already scanned this sensor</h4>
+			<h4 id='sensor_id'></h4>
+				<div id="reScan" data-role="button">Re-Scan</div>
+		 </div>		
+	</div>
+<!----------------------------- All Done Page --------------------------------->	
+	<div data-role="page" id="all_done">
+		 <div data-role="header" data-theme="a">
+		  <h1 class='selected_freezer'></h1>
+		 </div>
+		 <div id='chooserContent'  data-role="content">
+		 <h4 class='helper'>Are you finished with this box?</h4>
+				<div id="finished" data-role="button">Yes</div>
+				<div id="not_finished" data-role="button">No</div>
+		 </div>		
+	</div>
+<!------------------------------------------------------------------------------>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+	<!--<script type="text/javascript" src="barcodescanner.js"></script>-->
+</body>
+</html>
