@@ -226,9 +226,8 @@ function saveDevice(){/////////////////// This sends the device ID to saveDevice
       });   
 }
 function verifyLogin(){     
-    var uname=$('#txt_username').val();//document.getElementById("txt_username").value;
-    var pwd=$('#txt_pwd').val();//document.getElementById("txt_pwd").value;   
-	alert("USING PWORD : "+pwd);
+    var uname=$('#txt_username').val();
+    var pwd=$('#txt_pwd').val();
       $.ajax({
             type : 'POST',          
             url : 'http://microenergymonitor.com/app/checkLoginInstaller.php', // php script URL          
