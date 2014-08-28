@@ -234,7 +234,7 @@ function verifyLogin(){
                 'username':uname,
                 'password':pwd
             },
-			dataType:"json",
+			dataType:"text",
             success : function(data) {  
                 if(data!=="FAIL"){
 					window.localStorage.setItem("username", data.username);
