@@ -249,7 +249,8 @@ function verifyLogin(){
 
                 } else {    
 					// clear the stored password in case that is the problem //
-					localStorage.removeItem("password");
+					//localStorage.removeItem("password");
+					localStorage.clear();
                     alert("Wrong username or password");
                 }
             },
