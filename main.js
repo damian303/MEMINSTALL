@@ -251,8 +251,7 @@ function verifyLogin(){
 					// clear the stored password in case that is the problem //
 					//localStorage.removeItem("password");
 					localStorage.clear();
-					$("#txt_username").val()="";
-					$("#txt_pwd").val() ="";
+					$("#txt_pwd").val("");
                     alert("Wrong username or password");
                 }
             },
