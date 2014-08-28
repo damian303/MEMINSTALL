@@ -250,14 +250,16 @@ function verifyLogin(){
                 } else {    
 					// clear the stored password in case that is the problem //
 					//localStorage.removeItem("password");
-					localStorage.clear();
+					window.localStorage.setItem("username", "");
+					window.localStorage.setItem("password", "");
 					$("#txt_pwd").val("");
                     alert("Wrong username or password");
                 }
             },
             error : function(xhr, type) {
 				// clear the stored password in case that is the problem //
-				localStorage.removeItem("password");
+				window.localStorage.setItem("username", "");
+				window.localStorage.setItem("password", "");
 				if(xhr.status==0){var err = "No Connection!";}
 				else{var err = xhr.status;}
                 alert('Error occurred : '+err+' '+type);
