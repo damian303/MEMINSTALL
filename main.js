@@ -60,7 +60,7 @@ var imps_pre_install =[];
 				.on("click", function(){
 					if($("#select-device").find('option:selected').text()!=""){
 						//// SET DEVICE NAME ////
-						device = $("#select-device").find('option:selected').text();
+						device = $.trim($("#select-device").find('option:selected').text();).replace(' ', '+')
 						var id = $(this).attr("id");
 						temp = id;
 						///////// Change the page to CT chooser ///////////////////////
@@ -136,14 +136,13 @@ $('#setCT').click(function(){
 					$.mobile.changePage( '#layout', { transition: "slideup", changeHash: false });	
 					getSensors();
 				});
-		
+				
 		/* OPEN THE SCANNER PAGE*/
-		$.mobile.changePage( '#scan_sensor', { transition: "slideup", changeHash: false });		
-			
+		$.mobile.changePage( '#scan_sensor', { transition: "slideup", changeHash: false });				
 });
 
 function scanIt(){
-	var device =  $.trim($("#select-device").val()).replace(' ', '+');
+
 	$('#barcode').html("preparing to scan");
 	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
@@ -151,7 +150,7 @@ function scanIt(){
 			result.text = convertHEX(result.text);// Convert to new id format
             $('#sensor_id').html(result.text);
           
-			doing.id=result.text;
+			doing.id=(result.text).replace(/(\r\n|\n|\r)/gm,"");;
         }, function (error) { 
             alert("Scanning failed: ", error); 
         } );
@@ -177,7 +176,7 @@ function scanIt(){
 }
 function saveData(){
 	$('#lastID').html("Saving Sensor"+doing.id+"to database..");
-	var device = $("#select-device").find('option:selected').text();//$.trim($("#select-device").val()).replace(' ', '+');
+
       $.ajax({
             type : 'POST',          
             url : 'http://microenergymonitor.com/app/saveSensor.php', // savesensors.php saves the data to the sensors table         
@@ -190,18 +189,16 @@ function saveData(){
             },
 			dataType:"text",
             success : function(response) {  
-				console.log(response);
-				$('#lastID').html(response);
                 if(response!=="FAIL"){
 					reset();/********** RESET 'doing' object *********/
 					/* OPEN THE All Done PAGE*/
 					$.mobile.changePage( '#all_done', { transition: "slideup", changeHash: false });
                 } else {                   
-                    $('#lastID').html("Save Failed!");
+                   alert("Save Failed!");
                 }
             },
             error : function(xhr, type) {
-                $('#lastID').html('server error occurred '+xhr.status+' '+type);
+              alert('Error : '+xhr+' '+type);
             }
       });   
 }
@@ -219,17 +216,15 @@ function saveDevice(){/////////////////// This sends the device ID to saveDevice
             },
 			dataType:"text",
             success : function(response) {  
-				console.log(response);
-				$('#lastID').html(response);
                 if(response!=="FAIL"){
 					reset();/********** RESET 'doing' object *********/
 					//$('#chooser').popup('close');///// Close the chooser window ////
                 } else {                   
-                    $('#lastID').html("Save Failed!");
+                   alert('Save failed!');
                 }
             },
             error : function(xhr, type) {
-                $('#lastID').html('server error occurred '+xhr.status+' '+type);
+                 alert('Error : '+xhr+' '+type);
             }
       });   
 }
