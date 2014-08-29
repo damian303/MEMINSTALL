@@ -60,7 +60,7 @@ var imps_pre_install =[];
 				.on("click", function(){
 					if($("#select-device").find('option:selected').text()!=""){
 						//// SET DEVICE NAME ////
-						device = $.trim($("#select-device").find('option:selected').text();).replace(' ', '+')
+						device = $.trim($("#select-device").find('option:selected').text()).replace(' ', '+');
 						var id = $(this).attr("id");
 						temp = id;
 						///////// Change the page to CT chooser ///////////////////////
