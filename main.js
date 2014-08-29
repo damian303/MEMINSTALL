@@ -1,6 +1,6 @@
 var done=[];
-var buttons ={1:'Scan Code',2:'Save Sensor'}
 var doing={"CT":"","id":"","location":""};
+var device;
 var cts_used=[];
 var sensors;
 var temp;
@@ -15,12 +15,18 @@ var imps_pre_install =[];
 	
 	$('#login').live('pageinit', function(event, ui) {
          // FILL IN FORM IF DATA EXISTS
-		var username = window.localStorage.getItem("username")|| '';
-		var password = window.localStorage.getItem("password")|| '';
-		if(username!=null && password!=null){
+		if(localStorage.getItem("username")==='undefined'){
+			var username = "username";
+			var password = "password";
 			$("#txt_username").val(username);
 			$("#txt_pwd").val(password);
 		}
+		else{
+			var username = localStorage.getItem("username");
+			var password = localStorage.getItem("password");
+			$("#txt_username").val(username);
+			$("#txt_pwd").val(password);
+		};
 		$('#btn_login').click(function(){verifyLogin();});
     });
 
@@ -53,6 +59,8 @@ var imps_pre_install =[];
 				.style("fill", "#BFBFD4")
 				.on("click", function(){
 					if($("#select-device").find('option:selected').text()!=""){
+						//// SET DEVICE NAME ////
+						device = $("#select-device").find('option:selected').text();
 						var id = $(this).attr("id");
 						temp = id;
 						///////// Change the page to CT chooser ///////////////////////
@@ -198,7 +206,7 @@ function saveData(){
       });   
 }
 function saveDevice(){/////////////////// This sends the device ID to saveDevice.php which moves the device ID into the imp table from the pre_install table
-	var device = $("#select-device").find('option:selected').text();//$.trim($("#select-device").val()).replace(' ', '+');
+	
     done=[]; ///// This resets the working list of CTs ///
 	  $.ajax({
             type : 'POST',          
