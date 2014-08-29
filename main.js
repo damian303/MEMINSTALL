@@ -15,8 +15,8 @@ var imps_pre_install =[];
 	
 	$('#login').live('pageinit', function(event, ui) {
          // FILL IN FORM IF DATA EXISTS
-		var username = window.localStorage.getItem("username");
-		var password = window.localStorage.getItem("password");
+		var username = window.localStorage.getItem("username")|| '';
+		var password = window.localStorage.getItem("password")|| '';
 		if(username!=null && password!=null){
 			$("#txt_username").val(username);
 			$("#txt_pwd").val(password);
