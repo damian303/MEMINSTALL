@@ -42,8 +42,8 @@ var imps_pre_install =[];
 	
 	$(document).delegate("#layout", "pageshow", function() {
         if(device!==""){
+		// This is to reset the drop down menu to the current selected device //
 			var checkDevice = $.trim($("#select-device").find('option:selected').text()).replace(' ', '+');
-			alert("Device : "+device+" selected. menu says : "+checkDevice+".");
 			$("#select-device").val(device);
 			$("#select-device").selectmenu("refresh");
 		}
