@@ -45,6 +45,7 @@ var imps_pre_install =[];
 			var checkDevice = $.trim($("#select-device").find('option:selected').text()).replace(' ', '+');
 			alert("Device : "+device+" selected. menu says : "+checkDevice+".");
 			$("#select-device").val(device);
+			$("#select-device").selectmenu("refresh");
 		}
     });
 	
