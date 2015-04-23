@@ -85,24 +85,11 @@ var imps_pre_install =[];
 		getAvailableImps();
 		getSensors();
 });
-	
-$('#setCT').click(function(){
-		///// Set the CT ////
-		var CT = $("#sensorPosition :radio:checked").val().replace("choice-", "");
-		doing.CT=CT;
-		
-		d3.select("#"+temp).style("fill", "green")
-		
-		var coords = {x:+d3.select("#"+temp).attr("x"),y:+d3.select("#"+temp).attr("y")};
-		var dims = {width:+d3.select("#"+temp).attr("width"),height:+d3.select("#"+temp).attr("height")};
-	
-		d3.select("#floor_plan")//// Label the selected freezer
-			.append("text")
-			.attr("class", "label")
-			.attr("dx", coords.x+(dims.width/2)-3)///// SHimmy
-			.attr("dy", coords.y+(dims.height/2)+5)
-			.text(CT);
-		
+
+init_buttons(); ///// Attempting to fix loopback problem Just init butons once //
+
+function init_buttons(){
+			
 			$('#scan')	
 				.click( function(){
 					// Scan sensor
@@ -136,7 +123,26 @@ $('#setCT').click(function(){
 					$.mobile.changePage( '#layout', { transition: "slideup", changeHash: false });	
 					getSensors();
 				});
-				
+}
+
+$('#setCT').click(function(){
+		///// Set the CT ////
+		var CT = $("#sensorPosition :radio:checked").val().replace("choice-", "");
+		doing.CT=CT;
+		
+		d3.select("#"+temp).style("fill", "green")
+		
+		var coords = {x:+d3.select("#"+temp).attr("x"),y:+d3.select("#"+temp).attr("y")};
+		var dims = {width:+d3.select("#"+temp).attr("width"),height:+d3.select("#"+temp).attr("height")};
+	
+		d3.select("#floor_plan")//// Label the selected freezer
+			.append("text")
+			.attr("class", "label")
+			.attr("dx", coords.x+(dims.width/2)-3)///// SHimmy
+			.attr("dy", coords.y+(dims.height/2)+5)
+			.text(CT);
+		/* init buttons went here */
+		
 		/* OPEN THE SCANNER PAGE*/
 		$.mobile.changePage( '#scan_sensor', { transition: "slideup", changeHash: false });				
 });
