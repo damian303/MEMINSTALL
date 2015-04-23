@@ -40,6 +40,14 @@ var imps_pre_install =[];
 	
 	$("#saveDevice").button({ disabled: false }); //////////// To try to fix dodgy save button
 	
+	$(document).delegate("#layout", "pageshow", function() {
+        if(device!==""){
+			var checkDevice = $.trim($("#select-device").find('option:selected').text()).replace(' ', '+');
+			alert("Device : "+device+" selected. menu says : "+checkDevice+".");
+			$("#select-device").val(device);
+		}
+    });
+	
 	$('#setStore').click(function(){
 		client_ID= $("#client_ID").val();
 		store_ID= $("#store_ID").val();
