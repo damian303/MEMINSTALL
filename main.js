@@ -58,7 +58,7 @@ var imps_pre_install =[];
 		//$('#chooseStore').html("Client ID :"+$("#client_ID").val()+"<br/>Store ID :"+$("#store_ID").val())////
 		$('#client_info').html("Client ID :"+$("#client_ID").val()+"<br/>Store ID :"+$("#store_ID").val());
 		$.mobile.changePage( '#layout', { transition: "slideup", changeHash: false });	
-		d3.xml("http://microenergymonitor.com/app/layouts/"+file_name, "image/svg+xml", function(xml) {
+		d3.xml("http://microenergymonitor.com/layouts/"+file_name, "image/svg+xml", function(xml) {
 		
 			d3.select("#svg").style("height", "500px");//////////////// Hard coded change in final version
 			$('#svg').html(xml.documentElement);
@@ -227,13 +227,12 @@ function saveDevice(){/////////////////// This sends the device ID to saveDevice
                 'client_ID':client_ID,
                 'store_ID':store_ID,
 				'device': device,
-				'imp_ID': imps_pre_install[device],
+				'imp_ID': imps_pre_install[device]
             },
 			dataType:"text",
             success : function(response) {  
                 if(response!=="FAIL"){
 					reset();/********** RESET 'doing' object *********/
-					//$('#chooser').popup('close');///// Close the chooser window ////
                 } else {                   
                    alert('Save failed!');
                 }
