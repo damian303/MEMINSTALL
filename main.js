@@ -162,7 +162,7 @@ function scanIt(){
 	var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan( function (result) { 
-			result.text = convertHEX(result.text);// Convert to new id format
+			//result.text = convertHEX(result.text);// Convert to new id format
             $('#sensor_id').html(result.text);
           
 			doing.id=(result.text).replace(/(\r\n|\n|\r)/gm,"");;
